@@ -42,15 +42,15 @@ export function FusionPreview({ fusion, loading }: { fusion: Fusion | null, load
         )}
         {fallbackIndex === 1 && (
           <Image 
-             src={`https://images.alexonsager.net/pokemon/fused/${fusion.bodyId}/${fusion.bodyId}.${fusion.headId}.png`}
-             alt={`${fusion.fusionName} Legacy`} fill className="object-contain drop-shadow-2xl" unoptimized 
+             src={`https://ifd-spaces.sfo2.cdn.digitaloceanspaces.com/generated/${fusion.headId}.${fusion.bodyId}.png`}
+             alt={`${fusion.fusionName} Autogen`} fill className="object-contain drop-shadow-2xl" unoptimized 
              onError={() => setFallbackIndex(2)}
           />
         )}
         {fallbackIndex === 2 && (
           <Image 
-             src={`https://raw.githubusercontent.com/Aegide/autogen-fusion-sprites/master/Battlers/${fusion.headId}/${fusion.headId}.${fusion.bodyId}.png`}
-             alt={`${fusion.fusionName} Autogen`} fill className="object-contain drop-shadow-2xl" unoptimized 
+             src={`https://images.alexonsager.net/pokemon/fused/${fusion.bodyId}/${fusion.bodyId}.${fusion.headId}.png`}
+             alt={`${fusion.fusionName} Legacy`} fill className="object-contain drop-shadow-2xl" unoptimized 
              onError={() => setFallbackIndex(3)}
           />
         )}
