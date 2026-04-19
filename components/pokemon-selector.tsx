@@ -29,7 +29,7 @@ export function PokemonSelector({ label, selected, onSelect }: PokemonSelectorPr
   }, [query]);
 
   return (
-    <div className={`relative flex flex-col w-full max-w-sm gap-2 ${isOpen ? 'z-50' : 'z-10'}`}>
+    <div className={`relative flex flex-col w-full max-w-sm gap-2 ${isOpen ? 'z-50' : ''}`}>
       <label className="text-sm font-semibold text-muted-foreground">{label}</label>
       
       {selected ? (

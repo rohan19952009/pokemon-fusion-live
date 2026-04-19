@@ -95,14 +95,14 @@ export default function GeneratorPage() {
             <p className="text-muted-foreground mt-2">Select a Head and a Body Pokémon to begin fusing.</p>
           </div>
 
-          <div className="flex flex-col gap-6 w-full items-center lg:items-start p-6 border rounded-xl bg-card">
+          <div className="flex flex-col gap-6 w-full items-center lg:items-start p-6 border rounded-xl bg-card relative z-30">
             <PokemonSelector 
               label="Head (Primary)" 
               selected={headPokemon} 
               onSelect={setHeadPokemon} 
             />
             
-            <Button variant="ghost" size="icon" onClick={swapPokemon} className="rounded-full shadow-sm border bg-background" title="Swap Head and Body">
+            <Button variant="ghost" size="icon" onClick={swapPokemon} className="rounded-full shadow-sm border bg-background relative z-0" title="Swap Head and Body">
               <ArrowLeftRight className="w-4 h-4 rotate-90 lg:rotate-0" />
             </Button>
             
@@ -113,7 +113,7 @@ export default function GeneratorPage() {
             />
           </div>
 
-          <div className="flex w-full gap-2 mt-6">
+          <div className="flex w-full gap-2 mt-6 relative z-10">
             <Button variant="outline" className="flex-1 text-xs" onClick={reset}>
               <RefreshCcw className="w-3 h-3 mr-1" />
               Clear
