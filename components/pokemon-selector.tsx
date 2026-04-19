@@ -29,7 +29,7 @@ export function PokemonSelector({ label, selected, onSelect }: PokemonSelectorPr
   }, [query]);
 
   return (
-    <div className="relative flex flex-col w-full max-w-sm gap-2">
+    <div className={`relative flex flex-col w-full max-w-sm gap-2 ${isOpen ? 'z-50' : 'z-10'}`}>
       <label className="text-sm font-semibold text-muted-foreground">{label}</label>
       
       {selected ? (
@@ -67,7 +67,7 @@ export function PokemonSelector({ label, selected, onSelect }: PokemonSelectorPr
           />
           
           {isOpen && results.length > 0 && (
-            <div className="absolute z-50 w-full mt-1 bg-card border shadow-lg rounded-md overflow-hidden">
+            <div className="absolute z-50 w-full mt-1 bg-background border shadow-2xl rounded-md overflow-hidden">
               <ScrollArea className="max-h-64">
                 {results.map((p) => (
                   <div 
