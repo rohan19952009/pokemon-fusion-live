@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useGeneratorStore } from '@/lib/store/generator';
-import { PokemonSelector } from '@/components/pokemon-selector';
+import { PokemonModalSelector } from '@/components/pokemon-modal-selector';
 import { FusionPreview } from '@/components/fusion-preview';
 import { FusionStatsCard } from '@/components/fusion-stats-card';
 import { Button } from '@/components/ui/button';
@@ -95,19 +95,28 @@ export default function GeneratorPage() {
             <p className="text-muted-foreground mt-2">Select a Head and a Body Pokémon to begin fusing.</p>
           </div>
 
-          <div className="flex flex-col gap-6 w-full items-center lg:items-start p-6 border rounded-xl bg-card relative z-30">
-            <PokemonSelector 
-              label="Head (Primary)" 
+          {/* Primary Selection Cards (Side-by-Side Flex) */}
+          <div className="flex flex-row gap-4 w-full justify-center lg:justify-start items-center p-6 border rounded-xl bg-card relative z-30 shadow-sm">
+            <PokemonModalSelector 
+              label="Head" 
               selected={headPokemon} 
               onSelect={setHeadPokemon} 
             />
             
-            <Button variant="ghost" size="icon" onClick={swapPokemon} className="rounded-full shadow-sm border bg-background relative z-0" title="Swap Head and Body">
-              <ArrowLeftRight className="w-4 h-4 rotate-90 lg:rotate-0" />
-            </Button>
+            <div className="flex flex-col items-center justify-center gap-2">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={swapPokemon} 
+                className="rounded-full shadow-sm border bg-background hover:bg-muted transition-all rotate-90 sm:rotate-0" 
+                title="Swap Head and Body"
+              >
+                <ArrowLeftRight className="w-5 h-5 text-muted-foreground" />
+              </Button>
+            </div>
             
-            <PokemonSelector 
-              label="Body (Secondary)" 
+            <PokemonModalSelector 
+              label="Body" 
               selected={bodyPokemon} 
               onSelect={setBodyPokemon} 
             />
