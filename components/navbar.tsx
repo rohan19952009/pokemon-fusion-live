@@ -19,6 +19,9 @@ export function Navbar() {
             <Link href="/favorites" className="text-sm font-medium transition-colors hover:text-primary">
               Favorites
             </Link>
+            <Link href="/cheats" className="text-sm font-medium transition-colors hover:text-primary">
+              Cheats
+            </Link>
             <Link href="/about" className="text-sm font-medium transition-colors hover:text-primary">
               About
             </Link>

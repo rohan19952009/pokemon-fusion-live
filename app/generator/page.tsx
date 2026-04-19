@@ -10,6 +10,15 @@ import { RefreshCcw, Save, ArrowLeftRight } from 'lucide-react';
 import { Fusion } from '@/types';
 import { calculateStats, calculateTypes, generateFusionName, mergeAbilities } from '@/lib/fusion/engine';
 import { calculateWeaknessesAndResistances } from '@/lib/fusion/type-chart';
+import { POKEMON_DB } from '@/lib/data/pokemon';
+
+const typeColors: Record<string, string> = {
+  Normal: '#A8A77A', Fire: '#EE8130', Water: '#6390F0', Electric: '#F7D02C',
+  Grass: '#7AC74C', Ice: '#96D9D6', Fighting: '#C22E28', Poison: '#A33EA1',
+  Ground: '#E2BF65', Flying: '#A98FF3', Psychic: '#F95587', Bug: '#A6B91A',
+  Rock: '#B6A136', Ghost: '#735797', Dragon: '#6F35FC', Dark: '#705898',
+  Steel: '#B7B7CE', Fairy: '#D685AD',
+};
 
 export default function GeneratorPage() {
   const { headPokemon, bodyPokemon, setHeadPokemon, setBodyPokemon, swapPokemon, reset } = useGeneratorStore();
@@ -55,13 +64,31 @@ export default function GeneratorPage() {
     }
   };
 
+  const handleRandomize = () => {
+    const r1 = Math.floor(Math.random() * POKEMON_DB.length);
+    const r2 = Math.floor(Math.random() * POKEMON_DB.length);
+    setHeadPokemon(POKEMON_DB[r1]);
+    setBodyPokemon(POKEMON_DB[r2]);
+  };
+
   useEffect(() => {
     fetchFusion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headPokemon, bodyPokemon]);
 
+  const bgGradient = fusionResult 
+    ? `linear-gradient(135deg, ${typeColors[fusionResult.type1] || '#ccc'} 0%, ${typeColors[fusionResult.type2 || fusionResult.type1] || '#eee'} 100%)`
+    : '';
+
   return (
-    <div className="container py-8 max-w-6xl">
+    <div className="container py-8 max-w-6xl relative">
+      {/* Subtle dynamic background */}
+      {fusionResult && (
+         <div 
+           className="absolute inset-0 opacity-10 blur-3xl rounded-full mix-blend-multiply dark:mix-blend-screen transition-all duration-1000 -z-10"
+           style={{ background: bgGradient }}
+         />
+      )}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Left Column: Selectors & Controls */}
@@ -89,20 +116,23 @@ export default function GeneratorPage() {
             />
           </div>
 
-          <div className="flex w-full gap-4 mt-6">
-            <Button variant="outline" className="flex-1" onClick={reset}>
-              <RefreshCcw className="w-4 h-4 mr-2" />
-              Reset
+          <div className="flex w-full gap-2 mt-6">
+            <Button variant="outline" className="flex-1 text-xs" onClick={reset}>
+              <RefreshCcw className="w-3 h-3 mr-1" />
+              Clear
+            </Button>
+            <Button variant="outline" className="flex-1 text-xs whitespace-nowrap px-1" onClick={handleRandomize}>
+               Randomize
             </Button>
             <Button 
-               className="flex-1"
+               className="flex-1 text-xs"
                disabled={!headPokemon || !bodyPokemon}
                onClick={() => {
                  alert("Saved to favorites!");
                }}
             >
-              <Save className="w-4 h-4 mr-2" />
-              Favorite
+              <Save className="w-3 h-3 mr-1" />
+              Fav
             </Button>
           </div>
         </div>

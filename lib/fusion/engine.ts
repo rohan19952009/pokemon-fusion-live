@@ -33,22 +33,17 @@ export function generateFusionName(head: Pokemon, body: Pokemon): string {
 }
 
 export function calculateStats(head: Pokemon, body: Pokemon): PokemonStats {
-  // Head gives 2/3 of special stats and speed? Or body bulk?
-  // Let's use standard weighted formula:
-  // HP: 2/3 Body + 1/3 Head
-  // Atk: 2/3 Body + 1/3 Head
-  // Def: 2/3 Body + 1/3 Head
-  // SpA: 2/3 Head + 1/3 Body
-  // SpD: 2/3 Head + 1/3 Body
-  // Spe: 2/3 Head + 1/3 Body
+  // Infinite Fusion Mathematics:
+  // HP, SpA, SpD: 2/3 Head + 1/3 Body
+  // Atk, Def, Spe: 1/3 Head + 2/3 Body
   
   return {
-    hp: Math.floor((body.stats.hp * 2 + head.stats.hp) / 3),
+    hp: Math.floor((head.stats.hp * 2 + body.stats.hp) / 3),
     attack: Math.floor((body.stats.attack * 2 + head.stats.attack) / 3),
     defense: Math.floor((body.stats.defense * 2 + head.stats.defense) / 3),
     specialAttack: Math.floor((head.stats.specialAttack * 2 + body.stats.specialAttack) / 3),
     specialDefense: Math.floor((head.stats.specialDefense * 2 + body.stats.specialDefense) / 3),
-    speed: Math.floor((head.stats.speed * 2 + body.stats.speed) / 3),
+    speed: Math.floor((body.stats.speed * 2 + head.stats.speed) / 3),
   };
 }
 

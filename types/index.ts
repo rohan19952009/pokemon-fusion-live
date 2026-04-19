@@ -10,8 +10,8 @@ export interface PokemonStats {
 export interface Pokemon {
   id: number;
   name: string;
-  slug: string;
-  generation: number;
+  slug?: string;
+  generation?: number;
   types: string[]; // e.g., ["Fire", "Flying"]
   stats: PokemonStats;
   abilities: string[];
@@ -19,7 +19,7 @@ export interface Pokemon {
     front_default: string;
     front_shiny?: string;
   };
-  artworkUrls: {
+  artworkUrls?: {
     official: string;
   };
 }
