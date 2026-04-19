@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Pokemon } from '@/types';
+import { searchPokemon } from '@/lib/data/pokemon';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { ScrollArea } from './ui/scroll-area';
@@ -24,19 +25,7 @@ export function PokemonSelector({ label, selected, onSelect }: PokemonSelectorPr
       setResults([]);
       return;
     }
-    const fetchResults = async () => {
-      try {
-        const res = await fetch(`/api/pokemon?q=${query}`);
-        const data = await res.json();
-        setResults(data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    
-    // debounce slightly
-    const t = setTimeout(fetchResults, 300);
-    return () => clearTimeout(t);
+    setResults(searchPokemon(query));
   }, [query]);
 
   return (

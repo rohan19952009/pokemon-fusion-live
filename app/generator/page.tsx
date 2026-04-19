@@ -8,6 +8,8 @@ import { FusionStatsCard } from '@/components/fusion-stats-card';
 import { Button } from '@/components/ui/button';
 import { RefreshCcw, Save, ArrowLeftRight } from 'lucide-react';
 import { Fusion } from '@/types';
+import { calculateStats, calculateTypes, generateFusionName, mergeAbilities } from '@/lib/fusion/engine';
+import { calculateWeaknessesAndResistances } from '@/lib/fusion/type-chart';
 
 export default function GeneratorPage() {
   const { headPokemon, bodyPokemon, setHeadPokemon, setBodyPokemon, swapPokemon, reset } = useGeneratorStore();
@@ -22,11 +24,30 @@ export default function GeneratorPage() {
     
     setIsGenerating(true);
     try {
-      const res = await fetch(`/api/fusion?head=${headPokemon.id}&body=${bodyPokemon.id}`);
-      if (res.ok) {
-        const data = await res.json();
-        setFusionResult(data);
-      }
+      // Simulate API delay
+      await new Promise(r => setTimeout(r, 600));
+
+      const name = generateFusionName(headPokemon, bodyPokemon);
+      const types = calculateTypes(headPokemon, bodyPokemon);
+      const stats = calculateStats(headPokemon, bodyPokemon);
+      const abilities = mergeAbilities(headPokemon, bodyPokemon);
+      const { weaknesses, resistances } = calculateWeaknessesAndResistances(types[0], types[1]);
+
+      const fusionResult: Fusion = {
+        headId: headPokemon.id,
+        bodyId: bodyPokemon.id,
+        fusionName: name,
+        type1: types[0],
+        type2: types[1],
+        stats,
+        abilities,
+        spriteMode: 'auto',
+        spriteUrl: `https://images.alexonsager.net/pokemon/fused/${bodyPokemon.id}/${bodyPokemon.id}.${headPokemon.id}.png`,
+        weaknesses,
+        resistances
+      };
+
+      setFusionResult(fusionResult);
     } catch (e) {
       console.error(e);
     } finally {
@@ -77,7 +98,6 @@ export default function GeneratorPage() {
                className="flex-1"
                disabled={!headPokemon || !bodyPokemon}
                onClick={() => {
-                 // Save to favorites logic (local state mock)
                  alert("Saved to favorites!");
                }}
             >

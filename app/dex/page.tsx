@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Pokemon } from '@/types';
+import { POKEMON_DB, searchPokemon } from '@/lib/data/pokemon';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -12,17 +13,11 @@ export default function DexPage() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    const fetchDex = async () => {
-      try {
-        const res = await fetch(`/api/pokemon?q=${search}`);
-        const data = await res.json();
-        setPokemon(data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    const t = setTimeout(fetchDex, 300);
-    return () => clearTimeout(t);
+    if (!search) {
+      setPokemon(POKEMON_DB);
+      return;
+    }
+    setPokemon(searchPokemon(search));
   }, [search]);
 
   return (
