@@ -8,9 +8,9 @@ function StatBar({ label, value, max = 255 }: { label: string, value: number, ma
     <div className="flex items-center gap-4 text-sm">
       <span className="w-12 font-medium text-muted-foreground">{label}</span>
       <span className="w-8 text-right font-semibold">{value}</span>
-      <div className="flex-1 h-2.5 bg-muted rounded-full overflow-hidden">
+      <div className="flex-1 h-2.5 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-700">
         <div 
-          className="h-full bg-primary" 
+          className="h-full bg-zinc-800 dark:bg-zinc-300 transition-all duration-1000 ease-out" 
           style={{ width: `${percentage}%` }}
         />
       </div>
