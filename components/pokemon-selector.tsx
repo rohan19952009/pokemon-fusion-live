@@ -67,7 +67,7 @@ export function PokemonSelector({ label, selected, onSelect }: PokemonSelectorPr
           />
           
           {isOpen && results.length > 0 && (
-            <div className="absolute z-50 w-full mt-1 bg-background border shadow-2xl rounded-md overflow-hidden">
+            <div className="absolute z-50 w-full mt-1 bg-white dark:bg-slate-950 border shadow-2xl rounded-md overflow-hidden">
               <ScrollArea className="max-h-64">
                 {results.map((p) => (
                   <div 
