@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Pokemon } from '@/types';
-import { searchPokemon } from '@/lib/data/pokemon';
+import { POKEMON_DB, searchPokemon } from '@/lib/data/pokemon';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { ScrollArea } from './ui/scroll-area';
@@ -22,7 +22,7 @@ export function PokemonSelector({ label, selected, onSelect }: PokemonSelectorPr
 
   useEffect(() => {
     if (!query) {
-      setResults([]);
+      setResults(POKEMON_DB.slice(0, 50));
       return;
     }
     setResults(searchPokemon(query));

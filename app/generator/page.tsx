@@ -33,9 +33,6 @@ export default function GeneratorPage() {
     
     setIsGenerating(true);
     try {
-      // Simulate API delay
-      await new Promise(r => setTimeout(r, 600));
-
       const name = generateFusionName(headPokemon, bodyPokemon);
       const types = calculateTypes(headPokemon, bodyPokemon);
       const stats = calculateStats(headPokemon, bodyPokemon);
