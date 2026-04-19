@@ -1,6 +1,5 @@
+import { useState } from 'react';
 import { Fusion } from '@/types';
-import { Card, CardContent } from './ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Separator } from './ui/separator';
 
 function StatBar({ label, value, max = 255 }: { label: string, value: number, max?: number }) {
@@ -20,21 +19,40 @@ function StatBar({ label, value, max = 255 }: { label: string, value: number, ma
 }
 
 export function FusionStatsCard({ fusion }: { fusion: Fusion | null }) {
+  const [activeTab, setActiveTab] = useState<'stats' | 'matchups' | 'abilities'>('stats');
+
   if (!fusion) return null;
 
   const totalStats = Object.values(fusion.stats).reduce((a, b) => a + b, 0);
 
   return (
-    <Card className="w-full">
-      <CardContent className="p-6">
-        <Tabs defaultValue="stats">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
-            <TabsTrigger value="stats">Stats</TabsTrigger>
-            <TabsTrigger value="matchups">Matchups</TabsTrigger>
-            <TabsTrigger value="abilities">Abilities</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="stats" className="space-y-4">
+    <div className="w-full border rounded-xl bg-card shadow-sm overflow-hidden">
+      <div className="p-6">
+        {/* Custom Tabs List */}
+        <div className="flex w-full items-center justify-center rounded-lg bg-muted p-1 mb-6">
+          <button 
+            onClick={() => setActiveTab('stats')}
+            className={`flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${activeTab === 'stats' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:bg-background/50'}`}
+          >
+            Stats
+          </button>
+          <button 
+            onClick={() => setActiveTab('matchups')}
+            className={`flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${activeTab === 'matchups' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:bg-background/50'}`}
+          >
+            Matchups
+          </button>
+          <button 
+            onClick={() => setActiveTab('abilities')}
+            className={`flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${activeTab === 'abilities' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:bg-background/50'}`}
+          >
+            Abilities
+          </button>
+        </div>
+        
+        {/* Content Panels */}
+        {activeTab === 'stats' && (
+          <div className="space-y-4 animate-in fade-in duration-300">
             <StatBar label="HP" value={fusion.stats.hp} />
             <StatBar label="ATK" value={fusion.stats.attack} />
             <StatBar label="DEF" value={fusion.stats.defense} />
@@ -46,9 +64,11 @@ export function FusionStatsCard({ fusion }: { fusion: Fusion | null }) {
               <span className="text-muted-foreground">Total Base Stats</span>
               <span>{totalStats}</span>
             </div>
-          </TabsContent>
-          
-          <TabsContent value="matchups" className="space-y-4">
+          </div>
+        )}
+        
+        {activeTab === 'matchups' && (
+          <div className="space-y-4 animate-in fade-in duration-300">
             <div>
               <h4 className="text-sm font-semibold mb-2">Weaknesses (2x)</h4>
               <div className="flex flex-wrap gap-2">
@@ -65,22 +85,24 @@ export function FusionStatsCard({ fusion }: { fusion: Fusion | null }) {
                 )) : <span className="text-xs text-muted-foreground">None</span>}
               </div>
             </div>
-          </TabsContent>
-          
-          <TabsContent value="abilities" className="space-y-4">
+          </div>
+        )}
+        
+        {activeTab === 'abilities' && (
+          <div className="space-y-4 animate-in fade-in duration-300">
             <p className="text-sm text-muted-foreground mb-4">
               The fused Pokémon may have one of the following abilities:
             </p>
             <ul className="space-y-2">
               {fusion.abilities.map(ab => (
-                <li key={ab} className="px-3 py-2 bg-muted rounded-md text-sm font-medium">
+                <li key={ab} className="px-3 py-2 bg-muted rounded-md text-sm font-medium capitalize">
                   {ab}
                 </li>
               ))}
             </ul>
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-    </Card>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

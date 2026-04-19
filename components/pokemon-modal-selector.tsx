@@ -45,14 +45,14 @@ export function PokemonModalSelector({ label, selected, onSelect }: PokemonModal
   return (
     <>
       {/* TRIGGER CARD */}
-      <div className="flex flex-col items-center gap-2 w-full max-w-[200px]">
+      <div className="flex flex-col items-center gap-2 w-full max-w-[150px] sm:max-w-[180px] lg:max-w-[200px]">
         <div 
           onClick={() => setIsOpen(true)}
-          className="relative w-full aspect-square rounded-xl border-2 border-muted bg-card hover:border-primary/50 transition-all cursor-pointer flex flex-col items-center justify-center p-4 group overflow-hidden shadow-sm hover:shadow-md"
+          className="relative w-full aspect-square rounded-xl border-2 border-muted bg-card hover:border-primary/50 transition-all cursor-pointer flex flex-col items-center justify-center p-2 sm:p-4 group overflow-hidden shadow-sm hover:shadow-md"
         >
           {selected ? (
             <>
-              <div className="relative w-32 h-32 transform group-hover:scale-110 transition-transform duration-300">
+              <div className="relative w-24 h-24 sm:w-32 sm:h-32 transform group-hover:scale-110 transition-transform duration-300">
                 <Image 
                   src={selected.spriteUrls.front_default} 
                   alt={selected.name} 

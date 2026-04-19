@@ -86,17 +86,17 @@ export default function GeneratorPage() {
            style={{ background: bgGradient }}
          />
       )}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-full">
         
         {/* Left Column: Selectors & Controls */}
-        <div className="lg:col-span-4 space-y-6 flex flex-col items-center lg:items-start">
+        <div className="space-y-6 flex flex-col items-center lg:items-start w-full">
           <div className="w-full text-center lg:text-left mb-4">
             <h1 className="text-3xl font-extrabold tracking-tight">Generator</h1>
             <p className="text-muted-foreground mt-2">Select a Head and a Body Pokémon to begin fusing.</p>
           </div>
 
           {/* Primary Selection Cards (Side-by-Side Flex) */}
-          <div className="flex flex-row gap-4 w-full justify-center lg:justify-start items-center p-6 border rounded-xl bg-card relative z-30 shadow-sm">
+          <div className="flex flex-row flex-wrap sm:flex-nowrap gap-4 w-full justify-center lg:justify-start items-center p-6 border rounded-xl bg-card relative z-30 shadow-sm">
             <PokemonModalSelector 
               label="Head" 
               selected={headPokemon} 
@@ -144,7 +144,7 @@ export default function GeneratorPage() {
         </div>
 
         {/* Right Column: Preview & Stats */}
-        <div className="lg:col-span-8 flex flex-col gap-6 w-full">
+        <div className="flex flex-col gap-6 w-full max-w-full">
           {/* Main Visualizer */}
           <FusionPreview fusion={fusionResult} loading={isGenerating} />
           
