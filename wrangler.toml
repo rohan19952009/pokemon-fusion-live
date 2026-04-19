@@ -1,0 +1,20 @@
+name = "pokemon-fusion-live"
+compatibility_date = "2024-04-19"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# KV Cache for generic API responses
+# [[kv_namespaces]]
+# binding = "FUSION_CACHE"
+# id = "your-kv-store-id"
+
+# D1 DB for Favorites
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "fusion-favorites-db"
+# database_id = "your-d1-id"
+
+# R2 Bucket for Custom Sprite Manifests
+# [[r2_buckets]]
+# binding = "FUSION_ASSETS"
+# bucket_name = "pokemon-fusion-sprites"
