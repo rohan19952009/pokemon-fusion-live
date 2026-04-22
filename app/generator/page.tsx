@@ -95,8 +95,8 @@ export default function GeneratorPage() {
             <p className="text-muted-foreground mt-2">Select a Head and a Body Pokémon to begin fusing.</p>
           </div>
 
-          {/* Primary Selection Cards (Side-by-Side Flex) */}
-          <div className="flex flex-row flex-wrap sm:flex-nowrap gap-4 w-full justify-center lg:justify-start items-center p-6 border rounded-xl bg-card relative z-30 shadow-sm">
+          {/* Primary Selection Cards (Side-by-Side Flex on Desktop, Stacked on Mobile) */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center lg:justify-start items-center p-6 border rounded-xl bg-card relative z-30 shadow-sm">
             <PokemonModalSelector 
               label="Head" 
               selected={headPokemon} 
@@ -122,22 +122,22 @@ export default function GeneratorPage() {
             />
           </div>
 
-          <div className="flex w-full gap-2 mt-6 relative z-10">
-            <Button variant="outline" className="flex-1 text-xs" onClick={reset}>
-              <RefreshCcw className="w-3 h-3 mr-1" />
+          <div className="grid grid-cols-3 w-full gap-2 mt-6 relative z-10">
+            <Button variant="outline" className="w-full text-xs px-1 sm:px-3" onClick={reset}>
+              <RefreshCcw className="w-3 h-3 mr-1 sm:mr-2" />
               Clear
             </Button>
-            <Button variant="outline" className="flex-1 text-xs whitespace-nowrap px-1" onClick={handleRandomize}>
+            <Button variant="outline" className="w-full text-xs px-1 sm:px-3" onClick={handleRandomize}>
                Randomize
             </Button>
             <Button 
-               className="flex-1 text-xs"
+               className="w-full text-xs px-1 sm:px-3"
                disabled={!headPokemon || !bodyPokemon}
                onClick={() => {
                  alert("Saved to favorites!");
                }}
             >
-              <Save className="w-3 h-3 mr-1" />
+              <Save className="w-3 h-3 mr-1 sm:mr-2" />
               Fav
             </Button>
           </div>
