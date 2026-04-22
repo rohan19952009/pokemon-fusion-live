@@ -6,7 +6,7 @@ import { PokemonModalSelector } from '@/components/pokemon-modal-selector';
 import { FusionPreview } from '@/components/fusion-preview';
 import { FusionStatsCard } from '@/components/fusion-stats-card';
 import { Button } from '@/components/ui/button';
-import { RefreshCcw, Save, ArrowLeftRight } from 'lucide-react';
+import { RefreshCcw, Save, ArrowLeftRight, Dices } from 'lucide-react';
 import { Fusion } from '@/types';
 import { calculateStats, calculateTypes, generateFusionName, mergeAbilities } from '@/lib/fusion/engine';
 import { calculateWeaknessesAndResistances } from '@/lib/fusion/type-chart';
@@ -123,22 +123,24 @@ export default function GeneratorPage() {
           </div>
 
           <div className="grid grid-cols-3 w-full gap-2 mt-6 relative z-10">
-            <Button variant="outline" className="w-full text-xs px-1 sm:px-3" onClick={reset}>
-              <RefreshCcw className="w-3 h-3 mr-1 sm:mr-2" />
-              Clear
+            <Button variant="outline" className="w-full text-xs px-0 sm:px-3" onClick={reset}>
+              <RefreshCcw className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Clear</span>
             </Button>
-            <Button variant="outline" className="w-full text-xs px-1 sm:px-3" onClick={handleRandomize}>
-               Randomize
+            <Button variant="outline" className="w-full text-xs px-0 sm:px-3" onClick={handleRandomize}>
+               <Dices className="w-4 h-4 sm:mr-2" />
+               <span className="hidden sm:inline">Randomize</span>
             </Button>
             <Button 
-               className="w-full text-xs px-1 sm:px-3"
+               className="w-full text-xs px-0 sm:px-3"
                disabled={!headPokemon || !bodyPokemon}
                onClick={() => {
                  alert("Saved to favorites!");
                }}
             >
-              <Save className="w-3 h-3 mr-1 sm:mr-2" />
-              Fav
+              <Save className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Favorite</span>
+              <span className="inline sm:hidden">Fav</span>
             </Button>
           </div>
         </div>
