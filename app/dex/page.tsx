@@ -76,7 +76,7 @@ export default function DexPage() {
          </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {pokemon.map(p => (
            <Card key={p.id} className="overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all bg-card/50 border shadow-sm">
              <CardContent className="p-4 flex flex-col items-center cursor-pointer relative group">
